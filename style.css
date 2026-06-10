@@ -68,3 +68,68 @@ body
     cursor: pointer;
     background-color: var(--pink);
 }
+
+form
+{
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem 2rem 2rem;
+    box-shadow: 0 0 15px var(--green-3);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+form label
+{
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+form input
+{
+    margin-bottom: 15px;
+    height: 2.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    width: 20rem;
+}
+
+.colum
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#btn
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+form button
+{
+    display: flex;
+    align-items: center;
+    width: 8rem;
+    height: 2.3rem;
+    margin-top: 10px;
+    justify-content: center;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: var(--green-3);
+    font-size: 1.2rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 200;
+    color: #fff;
+}
+
+form button:hover
+{
+    cursor: pointer;
+    background-color: var(--pink);
+}
