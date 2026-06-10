@@ -41,3 +41,60 @@ function criarLinha (p)
 
     return tr;
 }
+
+
+// ==========================CADASTRAR================================\\
+const btnCadastrar = document.getElementById('btn-cadastrar');
+const formulario = document.getElementById('formCadastro');
+
+if (btnCadastrar)
+{
+    btnCadastrar.addEventListener("click", async function (evento)
+    {
+        evento.preventDefault();
+
+        const nomeInformado = document.getElementById('input-nome').value;
+        const quantInformada = document.getElementById('input-quantidade').value;
+
+        const novoMaterial =
+        {
+            nome: nomeInformado.trim().toLowerCase(),
+            quant: Number(quantInformada)
+        };
+
+        await salvarMaterial(novoMaterial);
+    });
+}
+
+async function salvarMaterial(material) 
+{
+    try
+    {
+        const resposta = await fetch (API_MATERIAIS,
+        {
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(material)
+        });
+
+        if (!resposta.ok)
+        {
+            throw new Error ("Não foi possível salvar o material no servidor");
+        }
+
+        const dadosSalvos = await resposta.json();
+        console.log ("Sucesso: ", dadosSalvos);
+
+        alert ("Material cadastrado com sucesso");
+
+        formulario.reset();
+    }
+    catch (erro)
+    {
+        console.error ('Erro na requisição: ', erro);
+        alert ("Houve um erro ao tentar cadastrar o material");
+    }
+}
