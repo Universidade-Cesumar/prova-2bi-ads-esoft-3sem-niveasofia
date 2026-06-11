@@ -191,3 +191,26 @@ tbody td
     font-size: 0.9rem;
     color: #1a2e1a;
 }
+
+@media (max-width: 600px) 
+{
+    .tabela-container
+    {
+        width: 70vw;
+    }
+
+    .container
+    {
+        width: 70vw;
+    }
+
+    form
+    {
+        width: 70vw;
+    }
+
+    form input
+    {
+        width: 12rem;
+    }
+}
