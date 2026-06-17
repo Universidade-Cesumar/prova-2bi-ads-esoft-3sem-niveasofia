@@ -37,9 +37,28 @@ function criarLinha (p)
     tr.innerHTML = `
         <td>${p.nome}</td>
         <td>${p.quant}</td>
+        <td>
+            <button class="btn-baixar" onclick="">Baixar</button>
+            <button class="btn-excluir" onclick="excluirProduto(${p.id}, this)">Excluir</button>
+        </td>
     `;
 
     return tr;
+}
+
+async function excluirProduto(id, botao) {
+    if (!confirm('Tem certeza que deseja excluir este produto?')) return;
+
+    try {
+        const resposta = await fetch(`${API_MATERIAIS}/${id}`, { method: 'DELETE' });
+
+        if (!resposta.ok) throw new Error('Erro ao excluir produto.');
+
+        botao.closest('tr').remove();
+    } catch (erro) {
+        console.error(erro);
+        alert('Erro ao excluir produto.');
+    }
 }
 
 
