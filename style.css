@@ -220,7 +220,6 @@ tbody td
 
 dialog
 {
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -259,3 +258,18 @@ dialog
 
 .btn-retirada { background-color: var(--green-3);}
 .btn-excluir { background-color: var(--pink);}
+
+.btnClose
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#btnClose
+{
+    background: none;
+    border: none;
+    filter: drop-shadow(0 0 2px #fff);
+    margin-top: 5px;
+}
