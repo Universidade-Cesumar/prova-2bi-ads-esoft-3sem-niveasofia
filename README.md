@@ -84,3 +84,19 @@ const criarUsuario = async (dadosUsuario) =>
 
 criarUsuario({ nome: "Carlos Souza", email: "carlos@email.com" });
 ```
+
+## 🔗 Endpoint da API
+
+O sistema utiliza um recurso no MockAPI:
+
+| Recurso | Descrição |
+|---|---|
+| `/materiais` | Cadastro e controle do estoque de produtos |
+
+## ⚙️ Funcionalidades Implementadas
+
+- **Cadastro de produtos** 
+- **Registro de Baixa de itens** com atualização automática do estoque via `PUT`
+- **Tabela de estoque** com edição inline e exclusão de produtos
+- **Tratamento de erros** → Não permite dar baixa em valor maior do que, o valor que contém no estoque. Aceita apenas valores. 
+
