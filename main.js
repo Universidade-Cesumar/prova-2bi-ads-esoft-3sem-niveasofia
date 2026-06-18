@@ -69,36 +69,41 @@ function retirada(botao)
     document.getElementById('dialog').showModal();
 }
 
-document.querySelector('.btn-baixar').addEventListener('click', async function ()
+const btnBaixar = document.querySelector('.btn-baixar');
+
+if (btnBaixar) 
 {
-    const valorRetirada = Number(document.getElementById('input-retirada').value);
-    const quantAtual = Number(linhaSelecionada.cells[1].textContent);
-
-    if (!validarRetirada(quantAtual, valorRetirada)) return;
-
-    const novaQuant = quantAtual - valorRetirada;
-
-    try
+    btnBaixar.addEventListener('click', async function () 
     {
-        const resposta = await fetch(`${API_MATERIAIS}/${idSelecionado}`,
+        const valorRetirada = Number(document.getElementById('input-retirada').value);
+        const quantAtual = Number(linhaSelecionada.cells[1].textContent);
+
+        if (!validarRetirada(quantAtual, valorRetirada)) return;
+
+        const novaQuant = quantAtual - valorRetirada;
+
+        try
         {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ quant: novaQuant })
-        });
+            const resposta = await fetch(`${API_MATERIAIS}/${idSelecionado}`,
+            {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ quant: novaQuant })
+            });
 
-        if (!resposta.ok) throw new Error('Erro ao atualizar estoque.');
+            if (!resposta.ok) throw new Error('Erro ao atualizar estoque.');
 
-        linhaSelecionada.cells[1].textContent = novaQuant;
-        dialog.close();
-    }
-    catch (erro)
-    {
-        console.error(erro);
-        alert('Erro ao registrar retirada.');
-        dialog.close();
-    }
-});
+            linhaSelecionada.cells[1].textContent = novaQuant;
+            dialog.close();
+        }
+        catch (erro)
+        {
+            console.error(erro);
+            alert('Erro ao registrar retirada.');
+            dialog.close();
+        }
+    });
+};
 
 function validarRetirada(estoqueAtual, quantidadeRetirada) 
 {
