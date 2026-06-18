@@ -80,7 +80,8 @@ form
     backdrop-filter: blur(5px);
 }
 
-form label
+form label,
+.labelRetirada
 {
     font-size: 1.2rem;
     margin-bottom: 2px;
@@ -110,7 +111,8 @@ form input
     align-items: center;
 }
 
-form button
+form button,
+.btn-baixar
 {
     display: flex;
     align-items: center;
@@ -128,7 +130,8 @@ form button
     color: #fff;
 }
 
-form button:hover
+form button:hover,
+.btn-baixar:hover
 {
     cursor: pointer;
     background-color: var(--pink);
@@ -214,3 +217,45 @@ tbody td
         width: 12rem;
     }
 }
+
+dialog
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    box-shadow: 0 0 15px var(--green-3);
+    background-color: #51875cb3;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    border: none;
+}
+
+#input-retirada
+{
+    width: 15rem;
+    margin-top: 1px;
+    height: 2.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.btn-retirada,
+.btn-excluir
+{
+    align-items: center;
+    margin-top: 10px;
+    justify-content: center;
+    border: none;
+    border-radius: 8px;
+    padding: 3px;
+    font-size: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 200;
+    color: #fff;
+}
+
+.btn-retirada { background-color: var(--green-3);}
+.btn-excluir { background-color: var(--pink);}
