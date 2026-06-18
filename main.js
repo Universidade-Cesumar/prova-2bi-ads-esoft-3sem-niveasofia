@@ -2,11 +2,19 @@
 
 const API_MATERIAIS = 'https://6a29f55af59cb8f65f1de03d.mockapi.io/api/almoxarifado/materiais';
 
-const listaMateriais = document.getElementById('lista-materiais')
+const listaMateriais = document.getElementById('lista-materiais');
+const btnClose = document.getElementById('btnClose');
+
 
 if (listaMateriais)
 {
     carregarTabelaMateriais();
+
+    btnClose.addEventListener("click", function ()
+    {
+        dialog.close();
+        document.getElementById('character').value = '';
+    });
 }
 
 async function carregarTabelaMateriais() 
@@ -34,11 +42,12 @@ async function carregarTabelaMateriais()
 function criarLinha (p)
 {
     const tr = document.createElement('tr');
+    tr.dataset.id = p.id;
     tr.innerHTML = `
         <td>${p.nome}</td>
         <td>${p.quant}</td>
         <td>
-            <button class="btn-baixar" onclick="">Baixar</button>
+            <button class="btn-retirada" onclick="retirada(this)">Retirada</button>
             <button class="btn-excluir" onclick="excluirProduto(${p.id}, this)">Excluir</button>
         </td>
     `;
@@ -46,7 +55,70 @@ function criarLinha (p)
     return tr;
 }
 
-async function excluirProduto(id, botao) {
+let linhaSelecionada = null;
+let idSelecionado = null;
+
+function retirada(botao)
+{
+    const tr = botao.closest('tr');
+
+    linhaSelecionada = tr;
+    idSelecionado = tr.dataset.id;
+
+    document.getElementById('input-retirada').value = '';
+    document.getElementById('dialog').showModal();
+}
+
+document.querySelector('.btn-baixar').addEventListener('click', async function ()
+{
+    const valorRetirada = Number(document.getElementById('input-retirada').value);
+    const quantAtual = Number(linhaSelecionada.cells[1].textContent);
+
+    if (!validarRetirada(quantAtual, valorRetirada)) return;
+
+    const novaQuant = quantAtual - valorRetirada;
+
+    try
+    {
+        const resposta = await fetch(`${API_MATERIAIS}/${idSelecionado}`,
+        {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ quant: novaQuant })
+        });
+
+        if (!resposta.ok) throw new Error('Erro ao atualizar estoque.');
+
+        linhaSelecionada.cells[1].textContent = novaQuant;
+        dialog.close();
+    }
+    catch (erro)
+    {
+        console.error(erro);
+        alert('Erro ao registrar retirada.');
+        dialog.close();
+    }
+});
+
+function validarRetirada(estoqueAtual, quantidadeRetirada) 
+{
+    if (!quantidadeRetirada || quantidadeRetirada <= 0)
+    {
+        alert('Informe um valor de retirada válido.');
+        return false;
+    }
+
+    if (quantidadeRetirada > estoqueAtual)
+    {
+        alert(`Quantidade insuficiente. Estoque atual: ${estoqueAtual}`);
+        return false;
+    }
+
+    return true;
+}
+
+async function excluirProduto(id, botao) 
+{
     if (!confirm('Tem certeza que deseja excluir este produto?')) return;
 
     try {
@@ -60,7 +132,6 @@ async function excluirProduto(id, botao) {
         alert('Erro ao excluir produto.');
     }
 }
-
 
 // ==========================CADASTRAR================================\\
 const btnCadastrar = document.getElementById('btn-cadastrar');
