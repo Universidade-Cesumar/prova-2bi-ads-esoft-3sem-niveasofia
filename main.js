@@ -193,3 +193,41 @@ async function salvarMaterial(material)
         alert ("Houve um erro ao tentar cadastrar o material");
     }
 }
+
+// ========================== BUSCA ================================\\
+const btnBuscar = document.getElementById('btnBuscar');
+const inputBusca = document.getElementById('input-busca');
+const totalItensSpan = document.getElementById('total-itens');
+
+if (btnBuscar) {
+    btnBuscar.addEventListener('click', function () {
+        const termoBusca = inputBusca.value.toLowerCase().trim();
+        const linhas = listaMateriais.getElementsByTagName('tr');
+        
+        let quantidadeEncontrada = 0;
+        let itemEncontrado = false;
+
+        if (linhas.length === 1 && linhas[0].textContent.includes('Carregando...')) return;
+
+        for (let i = 0; i < linhas.length; i++) {
+            const colunaNome = linhas[i].getElementsByTagName('td')[0];
+            const colunaQuant = linhas[i].getElementsByTagName('td')[1];
+
+            if (colunaNome && colunaQuant) {
+                const nomeProduto = colunaNome.textContent.toLowerCase().trim();
+
+                if (nomeProduto.includes(termoBusca) && termoBusca !== '') {
+                    quantidadeEncontrada = Number(colunaQuant.textContent);
+                    itemEncontrado = true;
+                    break;
+                }
+            }
+        }
+
+        if (itemEncontrado) {
+            totalItensSpan.textContent = quantidadeEncontrada;
+        } else {
+            totalItensSpan.textContent = "0 (Não encontrado)";
+        }
+    });
+}
