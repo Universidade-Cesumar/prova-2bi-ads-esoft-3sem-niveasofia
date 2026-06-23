@@ -7,10 +7,46 @@
     <link rel='stylesheet' href='style.css'>
 </head>
 <body class="principal">
-    <div class="container">
-        <h1>Sistema de Almoxarifado</h1>
-        <a href="cadastrar.html">Cadastrar</a>
-        <a href="estoque.html">Estoque</a>
+    <form id="formCadastro">
+        <h1>Cadastro de Materiais</h1>
+        <div class="colum">
+            <label for="nome">Nome</label>
+            <input id="input-nome" type="text" placeholder="luvas, agulhas..." required>
+            <label for="qntEstoque">Quantidade em Estoque</label>
+            <input id="input-quantidade" type="text" placeholder="5..." required>
+        </div>
+        <div id="btn">
+            <button id="btn-cadastrar" type="button">Cadastrar</button>
+        </div>
+    </form>
+
+    <div class="tabela-container" style="overflow-x: auto;">
+        <h1>Produtos Cadastrados</h1>
+        <table id="tabelaProdutos">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="lista-materiais">
+                <tr><td colspan="2">Carregando...</td></tr>
+            </tbody>
+        </table>
     </div>
+    <dialog id="dialog">
+        <div class="colum dig">
+            <div class="btnClose">
+                <button id="btnClose" type="button">❌</button>
+            </div>
+            <label for="valorRetirada" class="labelRetirada">Informe o valor de retirada:</label>
+            <input type="text" id="input-retirada">
+            <div id="btn">
+                <button class="btn-baixar" type="button">Baixar</button>
+            </div>
+        </div>
+    </dialog>
+    <script src="main.js"></script>
 </body>
 </html>
