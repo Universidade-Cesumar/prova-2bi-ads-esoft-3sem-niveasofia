@@ -27,49 +27,14 @@ body
     justify-content: center;
 }
 
-.container
+.divisao
 {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 3rem;
-    box-shadow: 0 0 15px var(--green-3);
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
+    flex-direction: row;
 }
 
-.container h1
-{
-    text-shadow: 0 0 2px var(--green-3);
-}
-
-.container a
-{
-    text-align: center;
-    align-items: center;
-    margin: 6px;
-    border: none;
-    border-radius: 8px;
-    padding: 8px;
-    background-color: var(--green-3);
-    width: 15rem;
-    height: 3rem;
-    font-size: 1.5rem;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: 200;
-    color: #fff;
-    text-decoration: none;
-}
-
-.container a:hover
-{
-    cursor: pointer;
-    background-color: var(--pink);
-}
-
-form
+form, 
+.busca
 {
     display: flex;
     flex-direction: column;
@@ -78,16 +43,30 @@ form
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     backdrop-filter: blur(5px);
+    margin: 2rem 1rem;
+}
+
+form
+{
+    margin-bottom: 1rem;
 }
 
 form label,
-.labelRetirada
+.labelRetirada, 
+.busca label,
+.busca p
 {
     font-size: 1.2rem;
     margin-bottom: 2px;
 }
 
-form input
+.busca label
+{
+    margin-top: 20px;
+}
+
+form input,
+.busca input
 {
     margin-bottom: 15px;
     height: 2.2rem;
@@ -104,7 +83,7 @@ form input
     justify-content: space-between;
 }
 
-#btn
+.btn
 {
     display: flex;
     justify-content: flex-end;
@@ -112,11 +91,12 @@ form input
 }
 
 form button,
-.btn-baixar
+.btn-baixar,
+#btnBuscar
 {
     display: flex;
     align-items: center;
-    width: 8rem;
+    width: 6rem;
     height: 2.3rem;
     margin-top: 10px;
     justify-content: center;
@@ -139,14 +119,13 @@ form button:hover,
 
 .tabela-container
 {
-    width: 90%;
     width: 50vw;
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 10px;
     backdrop-filter: blur(5px);
     box-shadow: 0 0 15px var(--green-3);
     padding: 2rem;
-    margin: 2rem auto;
+    margin: 2rem 1rem;
 }
 
 .tabela-container h1
