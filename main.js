@@ -35,7 +35,7 @@ async function carregarTabelaMateriais()
     catch (erro)
     {
         console.error(erro);
-        listaMateriais.innerHTML = '<tr><td colspan="2">Erro ao carregar materiais.</td></tr>';
+        listaMateriais.innerHTML = '<tr><td colspan="3">Erro ao carregar materiais.</td></tr>';
     }
 }
 

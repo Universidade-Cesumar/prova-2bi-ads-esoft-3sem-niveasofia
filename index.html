@@ -10,18 +10,20 @@
     <h1 id="titulo">Sistema de Almoxarifado</h1>
     <div class="divisao">
         <div>  <!--cadastro e busca-->
-            <form id="formCadastro">
-                <h1>Cadastro de Materiais</h1>
-                <div class="colum">
-                    <label for="nome">Nome</label>
-                    <input id="input-nome" type="text" placeholder="luvas, agulhas..." required>
-                    <label for="qntEstoque">Quantidade em Estoque</label>
-                    <input id="input-quantidade" type="text" placeholder="5..." required>
-                </div>
-                <div class="btn">
-                    <button id="btn-cadastrar" type="button">Cadastrar</button>
-                </div>
-            </form>
+            <div>
+                <form id="formCadastro">
+                    <h1>Cadastro de Materiais</h1>
+                    <div class="colum">
+                        <label for="nome">Nome</label>
+                        <input id="input-nome" type="text" placeholder="luvas, agulhas..." required>
+                        <label for="qntEstoque">Quantidade em Estoque</label>
+                        <input id="input-quantidade" type="text" placeholder="5..." required>
+                    </div>
+                    <div class="btn">
+                        <button id="btn-cadastrar" type="button">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
 
             <div class="busca">
                 <h1 for="">Busca por item: </h1>
@@ -41,11 +43,11 @@
                     <tr>
                         <th>Nome</th>
                         <th>Quantidade</th>
-                        <th></th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody id="lista-materiais">
-                    <tr><td colspan="2">Carregando...</td></tr>
+                    <tr><td colspan="3">Carregando...</td></tr>
                 </tbody>
             </table>
         </div>
