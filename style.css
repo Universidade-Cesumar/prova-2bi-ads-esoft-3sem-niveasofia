@@ -260,3 +260,19 @@ dialog
     filter: drop-shadow(0 0 2px #fff);
     margin-top: 5px;
 }
+
+tbody tr.estoque-critico 
+{
+    background-color: rgba(188, 71, 73, 0.2) !important; 
+}
+
+tbody tr.estoque-critico td 
+{
+    color: #4a1516; 
+    font-weight: 600; 
+}
+
+tbody tr.estoque-critico:hover 
+{
+    background-color: rgba(188, 71, 73, 0.3) !important;
+}

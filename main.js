@@ -43,6 +43,11 @@ function criarLinha (p)
 {
     const tr = document.createElement('tr');
     tr.dataset.id = p.id;
+
+    if (Number(p.quant) < 10) {
+        tr.classList.add('estoque-critico');
+    }
+    
     tr.innerHTML = `
         <td>${p.nome}</td>
         <td>${p.quant}</td>
@@ -94,6 +99,13 @@ if (btnBaixar)
             if (!resposta.ok) throw new Error('Erro ao atualizar estoque.');
 
             linhaSelecionada.cells[1].textContent = novaQuant;
+
+            if (novaQuant < 10) {
+                linhaSelecionada.classList.add('estoque-critico');
+            } else {
+                linhaSelecionada.classList.remove('estoque-critico');
+            }
+
             dialog.close();
         }
         catch (erro)
