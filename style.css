@@ -91,7 +91,7 @@ form input,
     justify-content: space-between;
 }
 
-.btn
+#btn
 {
     display: flex;
     justify-content: flex-end;
@@ -123,6 +123,12 @@ form button:hover,
 {
     cursor: pointer;
     background-color: var(--pink);
+}
+
+.btn-baixar
+{
+    background-color: var(--green-2);
+    margin-top: 15px;
 }
 
 .tabela-container
@@ -212,7 +218,8 @@ tbody td
     }
 
     form input,
-    .busca input
+    .busca input,
+    dialog input
     {
         width: 100%;
     }
@@ -248,18 +255,19 @@ dialog
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 3rem;
+    padding: 1.5rem;
     box-shadow: 0 0 15px var(--green-3);
-    background-color: #51875cb3;
+    background-color: var(--green-3);
     border-radius: 10px;
     backdrop-filter: blur(5px);
     border: none;
+    color: var(--beige);
 }
 
 #input-retirada
 {
     width: 15rem;
-    margin-top: 1px;
+    margin-top: 3px;
     height: 2.2rem;
     border: none;
     border-radius: 6px;
@@ -290,14 +298,14 @@ dialog
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 #btnClose
 {
     background: none;
     border: none;
-    filter: drop-shadow(0 0 2px #fff);
-    margin-top: 5px;
+    filter: drop-shadow(0 0 1px var(--green-1));
 }
 
 tbody tr.estoque-critico 
