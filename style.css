@@ -181,7 +181,6 @@ tbody td
     padding: 9px 12px;
     font-size: 0.9rem;
     color: #1a2e1a;
-    white-space: nowrap;
 }
 
 @media (max-width: 950px) 
@@ -231,6 +230,16 @@ tbody td
     .tabela-container
     {
         padding: 15px 10px;
+    }
+
+    tbody td
+    {
+        word-break: break-word !important; 
+    }
+
+    tbody td:last-child
+    {
+        min-width: 120px !important;
     }
 }
 
