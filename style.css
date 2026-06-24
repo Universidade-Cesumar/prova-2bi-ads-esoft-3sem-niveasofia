@@ -148,6 +148,7 @@ table
     width: 100%;
     border-collapse: collapse;
     overflow: visible;
+    table-layout: auto;
 }
 
 thead tr
@@ -180,28 +181,56 @@ tbody td
     padding: 9px 12px;
     font-size: 0.9rem;
     color: #1a2e1a;
+    white-space: nowrap;
 }
 
-@media (max-width: 600px) 
+@media (max-width: 950px) 
 {
+    .divisao
+    {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .coluna-esquerda
+    {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tabela-container,
+    form,
+    .busca
+    {
+        width: 100%;
+        max-width: 25rem;
+        margin: 1rem 0;
+    }
+
+    form input,
+    .busca input
+    {
+        width: 100%;
+    }
+
+    h1
+    {
+        font-size: 20px;
+    }
+
+    #titulo
+    {
+        font-size: 25px;
+    }
+
     .tabela-container
     {
-        width: 70vw;
-    }
-
-    .container
-    {
-        width: 70vw;
-    }
-
-    form
-    {
-        width: 70vw;
-    }
-
-    form input
-    {
-        width: 12rem;
+        padding: 15px 10px;
     }
 }
 
@@ -231,8 +260,9 @@ dialog
 .btn-retirada,
 .btn-excluir
 {
+    display: inline-flex;
     align-items: center;
-    margin-top: 10px;
+    margin: 4px 2px;
     justify-content: center;
     border: none;
     border-radius: 8px;
