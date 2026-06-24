@@ -1,5 +1,3 @@
-'use strict';
-
 const API_MATERIAIS = 'https://6a29f55af59cb8f65f1de03d.mockapi.io/api/almoxarifado/materiais';
 
 const listaMateriais = document.getElementById('lista-materiais');
@@ -160,16 +158,70 @@ if (btnCadastrar)
     {
         evento.preventDefault();
 
-        const nomeInformado = document.getElementById('input-nome').value;
-        const quantInformada = document.getElementById('input-quantidade').value;
+        const nomeInformado = document.getElementById('input-nome').value.trim().toLowerCase();
+        const quantInformada = Number(document.getElementById('input-quantidade').value);
 
-        const novoMaterial =
+        if (!nomeInformado || quantInformada <= 0)
         {
-            nome: nomeInformado.trim().toLowerCase(),
-            quant: Number(quantInformada)
-        };
+            alert ("Por favor, insira um nome válido e uma quantidade maior que zero.");
+            return;
+        }
 
-        await salvarMaterial(novoMaterial);
+        try 
+        {
+            const respostaBusca = await fetch (API_MATERIAIS);
+            if (!respostaBusca.ok) throw new Error ("Erro ao consultar materiais existentes.");
+
+            const materiaisExistentes = await respostaBusca.json();
+
+            const itemDuplicado = materiaisExistentes.find(item => item.nome.trim().toLowerCase() === nomeInformado);
+
+            if (itemDuplicado)
+            {
+                const novaQuantidade = Number(itemDuplicado.quant) + quantInformada;
+
+                const respostaPUT = await fetch (`${API_MATERIAIS}/${itemDuplicado.id}`, 
+                {
+                    method: 'PUT',
+                    headers: { 'Content-Type' : 'application/json' },
+                    body: JSON.stringify ({quant: novaQuantidade})
+                });
+
+                if (!respostaPUT.ok) throw new Error ("Erro ao somar quantidade ao item existente.");
+
+                alert (`O item "${nomeInformado}" já existia. Quantidade adicionada ao estoque com sucesso!`);
+
+                const linhaNaTabela = document.querySelector(`tr[data-id="${itemDuplicado.id}"]`);
+                if (linhaNaTabela)
+                {
+                    linhaNaTabela.cells[1].textContent = novaQuantidade;
+
+                    if (novaQuantidade < 10) {
+                        linhaNaTabela.classList.add ('estoque-critico');
+                    } else {
+                        linhaNaTabela.classList.remove ('estoque-critico');
+                    }
+                } else {
+                    carregarTabelaMateriais();
+                }
+
+                formulario.reset();
+            }
+            else
+            {
+                const novoMaterial = 
+                {
+                    nome: nomeInformado,
+                    quant: quantInformada
+                };
+                await salvarMaterial (novoMaterial);
+            }
+        }
+        catch (erro)
+        {
+            console.error('Erro no fluxo de cadastro:', erro);
+            alert("Houve um erro ao processar o cadastro.");
+        }
     });
 }
 
@@ -196,6 +248,8 @@ async function salvarMaterial(material)
         console.log ("Sucesso: ", dadosSalvos);
 
         alert ("Material cadastrado com sucesso");
+
+        listaMateriais.appendChild(criarLinha(dadosSalvos));
 
         formulario.reset();
     }
@@ -239,7 +293,7 @@ if (btnBuscar) {
         if (itemEncontrado) {
             totalItensSpan.textContent = quantidadeEncontrada;
         } else {
-            totalItensSpan.textContent = "0 (Não encontrado)";
+            alert ("Item não existe no cadastro");
         }
     });
 }
